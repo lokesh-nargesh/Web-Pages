@@ -1,3 +1,4 @@
+// ========== 3D Cube Rotation ==========
 const cube = document.getElementById("cube");
 const scene = document.getElementById("scene");
 
@@ -10,17 +11,14 @@ let lastAngleY = angleY;
 let autoRotate = true;
 let resumeTimeout;
 
-// --- Continuous Auto Rotation ---
 function animate() {
-  if (autoRotate) {
-    angleY += 0.3;
-  }
+  if (autoRotate) angleY += 0.3;
   cube.style.transform = `rotateX(${angleX}deg) rotateY(${angleY}deg)`;
   requestAnimationFrame(animate);
 }
 animate();
 
-// --- Manual Drag Support ---
+// ========== Drag Support ==========
 scene.addEventListener("mousedown", (e) => {
   isDragging = true;
   startX = e.clientX;
@@ -30,7 +28,6 @@ scene.addEventListener("mousedown", (e) => {
   autoRotate = false;
   clearTimeout(resumeTimeout);
 });
-
 scene.addEventListener("mousemove", (e) => {
   if (!isDragging) return;
   const dx = e.clientX - startX;
@@ -38,18 +35,14 @@ scene.addEventListener("mousemove", (e) => {
   angleY = lastAngleY + dx * 0.5;
   angleX = lastAngleX - dy * 0.5;
 });
-
 scene.addEventListener("mouseup", () => {
   isDragging = false;
   resumeTimeout = setTimeout(() => autoRotate = true, 5000);
 });
-
 scene.addEventListener("mouseleave", () => {
   isDragging = false;
   resumeTimeout = setTimeout(() => autoRotate = true, 5000);
 });
-
-// Touch support
 scene.addEventListener("touchstart", (e) => {
   isDragging = true;
   const touch = e.touches[0];
@@ -60,7 +53,6 @@ scene.addEventListener("touchstart", (e) => {
   autoRotate = false;
   clearTimeout(resumeTimeout);
 });
-
 scene.addEventListener("touchmove", (e) => {
   if (!isDragging) return;
   const touch = e.touches[0];
@@ -69,15 +61,12 @@ scene.addEventListener("touchmove", (e) => {
   angleY = lastAngleY + dx * 0.5;
   angleX = lastAngleX - dy * 0.5;
 });
-
 scene.addEventListener("touchend", () => {
   isDragging = false;
   resumeTimeout = setTimeout(() => autoRotate = true, 5000);
 });
 
-
-
-// 🎊 Simple confetti generator
+// ========== Confetti ==========
 const canvas = document.getElementById('confetti-canvas');
 const ctx = canvas.getContext('2d');
 canvas.width = window.innerWidth;
@@ -85,7 +74,6 @@ canvas.height = window.innerHeight;
 
 const pieces = [];
 const colors = ['#ff5252', '#ff4081', '#ffb74d', '#81d4fa', '#aed581'];
-
 for (let i = 0; i < 100; i++) {
   pieces.push({
     x: Math.random() * canvas.width,
@@ -96,7 +84,6 @@ for (let i = 0; i < 100; i++) {
     rotation: Math.random() * 360,
   });
 }
-
 function updateConfetti() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   for (let piece of pieces) {
@@ -124,9 +111,8 @@ window.addEventListener('resize', () => {
   canvas.height = window.innerHeight;
 });
 
-
+// ========== Background Changer ==========
 const bg = document.getElementById("bg-layer");
-
 const birthdayImages = [
   "https://images.pexels.com/photos/2072181/pexels-photo-2072181.jpeg",
   "https://images.pexels.com/photos/3171837/pexels-photo-3171837.jpeg",
@@ -135,17 +121,43 @@ const birthdayImages = [
   "https://images.pexels.com/photos/2072180/pexels-photo-2072180.jpeg",
   "https://images.pexels.com/photos/2072155/pexels-photo-2072155.jpeg",
 ];
-
 let currentBgIndex = 0;
-
 function updateBackground() {
   currentBgIndex = (currentBgIndex + 1) % birthdayImages.length;
-  const nextImage = birthdayImages[currentBgIndex];
-  bg.style.backgroundImage = `url(${nextImage})`;
+  bg.style.backgroundImage = `url(${birthdayImages[currentBgIndex]})`;
 }
-
-// Initial background
 bg.style.backgroundImage = `url(${birthdayImages[0]})`;
-// Change every 5 seconds
 setInterval(updateBackground, 5000);
 
+// ========== Countdown Timer to 17 July 2025 ==========
+function updateTimer() {
+  const now = new Date();
+  const target = new Date("2025-07-17T00:00:00");
+  const diff = target - now;
+
+  if (diff <= 0) {
+    document.getElementById("timer").innerText = "🎉 It's Rani's Birthday Today! 🎉";
+    return;
+  }
+
+  const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+  const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+  const minutes = Math.floor((diff / (1000 * 60)) % 60);
+  const seconds = Math.floor((diff / 1000) % 60);
+
+  document.getElementById("timer").innerText =
+    `${days}d ${hours}h ${minutes}m ${seconds}s`;
+}
+setInterval(updateTimer, 1000);
+updateTimer();
+
+// ========== Floating Hearts ==========
+function createHeart() {
+  const heart = document.createElement("div");
+  heart.classList.add("heart");
+  heart.style.left = Math.random() * window.innerWidth + "px";
+  heart.style.animationDuration = (3 + Math.random() * 3) + "s";
+  document.body.appendChild(heart);
+  setTimeout(() => heart.remove(), 6000);
+}
+setInterval(createHeart, 500);

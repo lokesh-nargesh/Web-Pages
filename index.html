@@ -1,22 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta charset="UTF-8" />
   <title>Happy Birthday Rani 🎂</title>
   <link rel="stylesheet" href="style.css" />
 </head>
-
 <body>
   <canvas id="confetti-canvas"></canvas>
   <div id="bg-layer"></div>
 
+  <!-- Countdown Timer -->
+  <div class="countdown">
+    <h2>⏳ Countdown to Rani's Birthday:</h2>
+    <div id="timer">Loading...</div>
+  </div>
+
+  <!-- Birthday Banner -->
   <div class="birthday-banner">
     <h1>🎉 Happy Birthday Rani💖</h1>
     <p>You light up our world with joy and happiness!</p>
   </div>
 
+  <!-- 3D Cube -->
   <div class="scene" id="scene">
     <div class="cube" id="cube">
       <div class="face front"><img src="images/image1.jpg" /></div>
@@ -30,5 +36,4 @@
 
   <script src="script.js"></script>
 </body>
-
 </html>

@@ -134,3 +134,94 @@ html, body {
   50%  { transform: scale(1.05); }
   100% { transform: scale(1); }
 }
+
+/* ========== Countdown Timer ========== */
+.countdown {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: rgba(0, 0, 0, 0.5);
+  padding: 12px 20px;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+  color: #fff;
+  font-size: 18px;
+  animation: fadeIn 1.5s ease;
+  z-index: 1000;
+}
+#timer {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+/* ========== Floating Hearts ========== */
+.heart {
+  position: fixed;
+  width: 20px;
+  height: 20px;
+  background: red;
+  transform: rotate(45deg);
+  animation: floatUp 6s linear infinite;
+  z-index: 999;
+}
+
+.heart::before,
+.heart::after {
+  content: "";
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background: red;
+  border-radius: 50%;
+}
+.heart::before {
+  top: -10px;
+  left: 0;
+}
+.heart::after {
+  left: -10px;
+  top: 0;
+}
+
+@keyframes floatUp {
+  0%   { bottom: -20px; opacity: 1; }
+  100% { bottom: 100%; opacity: 0; }
+}
+
+/* ========== Countdown Timer (Responsive) ========== */
+.countdown {
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  background: rgba(0, 0, 0, 0.6);
+  padding: 10px 15px;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+  color: #fff;
+  font-size: 16px;
+  text-align: right;
+  z-index: 1000;
+}
+
+#timer {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+/* Responsive for small devices */
+@media (max-width: 768px) {
+  .countdown {
+    position: static;
+    margin: 10px auto;
+    text-align: center;
+    font-size: 14px;
+  }
+
+  #timer {
+    font-size: 18px;
+  }
+}
+
+
+
+
