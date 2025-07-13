@@ -1,0 +1,149 @@
+body {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  font-family: 'Comic Sans MS', cursive;
+  color: #fff;
+  text-align: center;
+  background: linear-gradient(-45deg, #ff9a9e, #fad0c4, #fbc2eb, #a6c1ee);
+  background-size: 400% 400%;
+  /* animation: gradientMove 15s ease infinite; */
+}
+
+@keyframes gradientMove {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.birthday-banner {
+  margin: 20px auto;
+  color: #fff;
+  animation: fadeIn 2s ease;
+}
+
+.scene {
+  width: 300px;
+  height: 300px;
+  margin: 40px auto;
+  perspective: 800px;
+  cursor: grab;
+}
+
+.cube {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: none;
+  /* no snapping — just smooth JS rotation */
+}
+
+
+.face {
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  border: 2px solid #fff;
+  background: #fff;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+}
+
+.face img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.front {
+  transform: rotateY(0deg) translateZ(150px);
+}
+
+.back {
+  transform: rotateY(180deg) translateZ(150px);
+}
+
+.right {
+  transform: rotateY(90deg) translateZ(150px);
+}
+
+.left {
+  transform: rotateY(-90deg) translateZ(150px);
+}
+
+.top {
+  transform: rotateX(90deg) translateZ(150px);
+}
+
+.bottom {
+  transform: rotateX(-90deg) translateZ(150px);
+}
+
+#confetti-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  width: 100%;
+  height: 100%;
+  z-index: 999;
+}
+
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotateX(-20deg) rotateY(0deg);
+  }
+
+  to {
+    transform: rotateX(-20deg) rotateY(360deg);
+  }
+}
+
+#bg-layer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  transition: background-image 1s ease-in-out;
+  animation: zoomIn 10s ease-in-out infinite;
+  filter: brightness(0.8);
+}
+
+@keyframes zoomIn {
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.05);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
